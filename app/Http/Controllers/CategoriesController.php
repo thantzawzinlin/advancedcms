@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests\CategoryStoreRequest;
+use App\Http\Requests\CategoryUpdateRequest;
 
 class CategoriesController extends Controller
 {
@@ -61,9 +62,9 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('admin.categories.create')->with('category',$category);//it is really important to add {with('variable name,variable)}
     }
 
     /**
@@ -73,9 +74,13 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryUpdateRequest $request, Category $category)
     {
-        //
+        $category->update([
+            'name'=>$request->name
+        ]);
+        toastr()->success('You have successfully updated your Category.');
+        return redirect()->route('categories.index');
     }
 
     /**
