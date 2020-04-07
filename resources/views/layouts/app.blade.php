@@ -90,6 +90,9 @@
                     <li class="list-group-item">
                         <a href="{{ route('posts.trashed') }}" calss="text-primary">All Trashed Post</a>
                     </li>
+                     <li class="list-group-item mt-4">
+                        <a href="{{ route('tags.index') }}" calss="text-primary">All Tag</a>
+                    </li>
                 </ul>
             </div>
             @endauth
