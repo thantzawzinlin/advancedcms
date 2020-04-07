@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+// Route::get('/posts/trashed', function () {
+//     return view('admin.posts.trashed');
+// });
+
+//Route::get('/posts/trashed','PostsController@trashed');
 
 Auth::routes();
 
@@ -23,4 +28,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix'=>'admin','middleware'=>'auth'], function(){
     Route::resource('categories','CategoriesController');
+    Route::get('posts/trashed',[ 'uses'=>'PostsController@trashed',
+    'as'=>'posts.trashed'
+    ]);
+    Route::resource('posts','PostsController');
+    
+   
+   
 });
+

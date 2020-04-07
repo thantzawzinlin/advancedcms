@@ -83,6 +83,12 @@
                     <li class="list-group-item">
                         <a href="{{ route('categories.index') }}" calss="text-primary">All Category</a>
                     </li>
+                     <li class="list-group-item">
+                        <a href="{{ route('posts.index') }}" calss="text-primary">All Post</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{{ route('posts.trashed') }}" calss="text-primary">All Trashed Post</a>
+                    </li>
                 </ul>
             </div>
             @endauth

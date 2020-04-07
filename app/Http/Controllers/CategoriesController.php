@@ -95,4 +95,7 @@ class CategoriesController extends Controller
         toastr()->success('You have successfully deleted your Category.');
         return redirect()->route('categories.index');
     }
+    public function home(){
+        return view('admin.categories.home');
+    }
 }

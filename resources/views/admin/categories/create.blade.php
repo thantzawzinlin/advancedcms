@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+   @include('includes.errors')
      <div class="d-flex justify-content-end">
         <a href="{{ route('categories.index') }}" class="btn btn-outline-success mb-2">Back</a>
     </div>
