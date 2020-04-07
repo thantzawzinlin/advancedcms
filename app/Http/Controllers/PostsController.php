@@ -109,6 +109,15 @@ class PostsController extends Controller
          return view('admin.posts.index')->with('posts',$trashed);
         // return view('admin.posts.index');
     }
+    public function restore($id){
+        //$post=Post::withTrashed()->find($id); //it work too
+
+        $post=Post::withTrashed()->where('id',$id)->firstOrFail();
+        $post->restore();
+        //return view('admin.posts.index')->with('posts',$trashed);
+         toastr()->success('You have successfully restore your post.');
+           return redirect()->route('posts.index');
+    }
     
    
 }

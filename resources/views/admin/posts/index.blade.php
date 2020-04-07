@@ -27,6 +27,8 @@
                             <td>{{ $post->title }}</td>
                             @if(!$post->trashed())
                             <td><a href="{{ route('posts.edit',$post->id) }}" class="btn btn-warning text-primary">Edit</a></td>
+                            @else
+                            <td><a href="{{ route('posts.restore',$post->id) }}" class="btn btn-warning text-primary">Restore</a></td>
                             @endif
                             <td><button type="button" onclick="handleDelete({{ $post->id }})" 
                                 class="btn btn-danger " 

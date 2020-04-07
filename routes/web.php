@@ -30,6 +30,9 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function(){
     Route::resource('categories','CategoriesController');
     Route::get('posts/trashed',[ 'uses'=>'PostsController@trashed',
     'as'=>'posts.trashed'
+    ]);// if you want to add more route ,put it before resource route
+     Route::get('posts/restore/{id}',[ 'uses'=>'PostsController@restore',
+    'as'=>'posts.restore'
     ]);
     Route::resource('posts','PostsController');
     
