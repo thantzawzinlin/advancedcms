@@ -11,8 +11,8 @@
 
     <!-- Scripts -->
    
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    
+    {{-- //<script src="{{ asset('js/app.js') }}" defer></script> you had to put this link
+     to footer when you use other jquery plugin or script link like trix editor--}} 
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -22,6 +22,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     @toastr_css
+    @yield('style')
 </head>
 <body>
     <div id="app">
@@ -104,5 +105,7 @@
      @jquery 
     @toastr_js
     @toastr_render
+     <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')
+   
 </html>

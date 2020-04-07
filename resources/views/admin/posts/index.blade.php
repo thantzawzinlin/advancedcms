@@ -77,8 +77,7 @@
 
        
         <script>
-            function handleDelete(id){
-               
+            function handleDelete(id){               
                 
                 var form =document.getElementById('formDelete')
                 form.action='/admin/posts/' + id //do not forget to pass the full Path .here i had to add "/admin/categories/" because  in my route i had added ["prefix" = "admin"]

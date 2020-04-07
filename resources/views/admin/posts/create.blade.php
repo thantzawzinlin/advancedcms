@@ -21,17 +21,38 @@
                     <label for="title">Title</label>
                     <input type="text" name="title" value="{{isset($post)? $post->title:''}}"class="form-control">
                 </div>
-                <div class="form-group">
+                 @if(isset($post))
+                   <img src="{{ asset('/storage/' .$post->image) }}" width='100px'>
+                 @endif
+                <div class="form-group">                   
                     <label for="image">Image</label>
                     <input type="file" name="image" class="form-control">
+                    
+                </div>
+                 <div class="form-group">
+                    <label for="category">Category</label>
+                    <select name="category_id" class="form-control">
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}" 
+                            @if(isset($post))
+                                    @if($post->category->id==$category->id)   
+                                        selected 
+                                    @endif
+                            @endif
+                            >{{ $category->name }}</option>
+                        @endforeach
+                        
+                    </select>
+                   
                 </div>
                 <div class="form-group">
                     <label for="content">Content</label>
-                    <textarea name="content" id="content" cols="30" rows="10" value="{{isset($post)? $post->content:''}}"class="form-control"></textarea>
+                    <input id="content" type="hidden" name="content" value="{{ isset($post)? $post->content:'' }}" >
+                    <trix-editor input="content"></trix-editor>
                 </div>
                 <div class="form-group">
                     <label for="published At">published At</label>
-                    <input type="text" name="published_at" class="form-control">
+                    <input type="text" name="published_at" id="published_at" class="form-control" value="{{ isset($post)?$post->published_at:'' }}">
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-success" >{{ isset($post)?'Edit Post':'Create Post' }}</button>
@@ -40,4 +61,19 @@
             </form>
         </div>
     </div>
+@stop
+@section('style')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+@stop
+
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+    flatpickr("#published_at",{
+       enableTime: true,
+    });
+
+    </script>
 @stop
