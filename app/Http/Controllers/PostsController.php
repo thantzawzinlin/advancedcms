@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\posts\PostStoreRequest;
 use App\Http\Requests\posts\PostEditRequest;
 use App\Post;
+use App\Tag;
 use App\Category;
 
 class PostsController extends Controller
@@ -28,7 +29,8 @@ class PostsController extends Controller
     {
         $category=Category::all();
         if($category->count()>0){
-            return view('admin.posts.create')->with('categories',$category);
+            return view('admin.posts.create')->with('categories',$category)
+                                             ->with('tags',Tag::all());
         }
          toastr()->success('You must created a category before creating any post.');
         return redirect()->route('categories.create');
@@ -44,14 +46,21 @@ class PostsController extends Controller
     public function store(PostStoreRequest $request)
     {
        // dd($request->image->store('posts'));
+       //dd($request->tags);
         $image=$request->image->store('posts');
-        Post::create([
+        $post= Post::create([
             'title'=>$request->title,
             'image'=>$image,
             'content'=>$request->content,
             'published_at'=>$request->published_at,
             'category_id'=>$request->category_id
         ]);
+        if($request->tags){
+            $post->tags()->attach($request->tags);
+        }
+
+
+
         toastr()->success('You have successfully created new post.');
         return redirect()->route('posts.index');
     }
@@ -76,7 +85,8 @@ class PostsController extends Controller
     public function edit(Post $post)
     {
         return view('admin.posts.create')->with('post',$post)
-                                        ->with('categories',Category::all());
+                                        ->with('categories',Category::all())
+                                        ->with('tags',Tag::all());
     }
 
     /**
@@ -98,7 +108,9 @@ class PostsController extends Controller
             $data['image'] =$image;
         }
         $post->update($data);
-
+        if($request->tags){
+            $post->tags()->sync($request->tags);
+        }
         toastr()->success('You have successfully created new post.');
         return redirect()->route('posts.index');
     }

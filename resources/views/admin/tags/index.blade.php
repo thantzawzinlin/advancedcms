@@ -13,6 +13,7 @@
             <table class="table table-hover">
                 <thead>
                     <th>Name</th>
+                    <th>posts count</th>
                     <th>Edit</th>
                     <th>delete</th>
                 </thead>
@@ -20,6 +21,7 @@
                     @foreach ($tags as $tag)
                         <tr>
                             <td>{{ $tag->tags_name }}</td>
+                            <td>{{ $tag->posts->count() }}</td>
                             <td><a href="{{ route('tags.edit',$tag->id) }}" class="btn btn-warning text-primary">Edit</a></td>
                             <td><button type="button" onclick="handleDelete({{ $tag->id }})" 
                                 class="btn btn-danger " 

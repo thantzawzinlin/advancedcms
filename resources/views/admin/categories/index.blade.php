@@ -13,6 +13,7 @@
             <table class="table table-hover">
                 <thead>
                     <th>Name</th>
+                    <th>post count</th>
                     <th>Edit</th>
                     <th>delete</th>
                 </thead>
@@ -20,6 +21,7 @@
                     @foreach ($categories as $category)
                         <tr>
                             <td>{{ $category->name }}</td>
+                            <td>{{ $category->posts->count() }}</td>
                             <td><a href="{{ route('categories.edit',$category->id) }}" class="btn btn-warning text-primary">Edit</a></td>
                             <td><button type="button" onclick="handleDelete({{ $category->id }})" 
                                 class="btn btn-danger " 
