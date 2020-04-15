@@ -93,6 +93,11 @@
                      <li class="list-group-item mt-4">
                         <a href="{{ route('tags.index') }}" calss="text-primary">All Tag</a>
                     </li>
+                    @if(Auth::user()->IsAdmin())
+                     <li class="list-group-item mt-4">
+                        <a href="{{ route('user.index') }}" calss="text-primary">All User</a>
+                    </li>
+                    @endif
                 </ul>
             </div>
             @endauth

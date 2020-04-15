@@ -40,4 +40,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function(){
    
    
 });
+Route::get('users',['uses'=>'UsersController@index',
+            'as'=>'user.index'
+])->middleware(['auth','admin']);
+Route::post('users/{user}/make_admin','UsersController@make_admin')->name('make_admin');
 
